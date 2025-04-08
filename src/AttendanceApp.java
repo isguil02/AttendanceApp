@@ -7,10 +7,10 @@
  * @see <a href="https://github.com/isguil02/AttendanceAppV2">GitHub Repository</a>
  */
 public class AttendanceApp {
-    /** The home team playing. */
+    /** The class 1 attendance. */
     private final Course section1;
 
-    /** The away team playing. */
+    /** The class 2 attendance. */
     private final Course section2;
 
     /** Standard double dash line for display output */
@@ -19,7 +19,7 @@ public class AttendanceApp {
     /** Standard single dash line for display output */
     private static final String SINGLE_DASH_LINE = DOUBLE_DASH_LINE.replace('=', '-');
 
-    public AttendanceApp{
+    public AttendanceApp(){
         section1 = new Course();
         section2 = new Course();
     }//end of default constructor

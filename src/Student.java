@@ -1,207 +1,268 @@
-import java.util.ArrayList;
-import java.util.List;
-
-
 /**
- * Use to keep track of a basketball Course that is made up with multiple Students along with the Course's stats.
- * @author dejohns2
+ * A Basketball Student and the student's stats.
+ * @author isguil02
  * @since 2025.02.22
  * @version 1.0 beta
- * @see <a href="https://github.com/dejohns2/JavaSection3_BB_Scoreboard_Spring2025.git">GitHub Repository</a>
+ * @see <a href="https://github.com/isguil02/AttendanceAppV2">GitHub Repository</a>
  */
-public class Course {
+public class Student {
 
 
-    /**
-     * The course's name.
-     */
+
+
+    /** The Student's seat. */
+    private int seat;
+
+
+
+
+    /** The Student's name. */
     private String name;
 
 
-    /** The course's students. */
-    private final List<Student> students;
+    /** The student's number of onTimes. */
+    private int onTimes;
 
 
-    /** Sets the course's name to "Unknown", and assigns students to an empty new ArrayList */
-    public Course() {
-        name = "Unknown";
-        students = new ArrayList<>();
-    }
+    /** The Student's number of 1pt field goals. */
+    private int late;
+
+
+    /** The Student's number of 2pt field goals. Need to multiply by 2 when calculating total points. */
+    private int excused;
+
+
+    /** The Student's number of 3pt field goals. Need to multiply by 3 when calculating total points. */
+    private int unexcused;
+
+
 
 
     /**
-     * Calls the default constructor, and then set's the course's name using the setter for data validation.
-     * @param name the course's name
-     * @throw Exception if the setName fails due to a blank name
+     * Set the Student's fields to default values null and zeroes.
+     * The default constructor is PRIVATE, so it is ONLY called by the overload constructor.
      */
-    public Course(String name) throws Exception {
-        this();
-        setName(name);
-    }
+    private Student() {
+        name = null;
+        seat = 0;
+        onTimes = 0;
+        late = 0;
+        excused = 0;
+        unexcused = 0;
+    } // end of default constructor
+
+
 
 
     /**
-     * Gets the course's name.
-     * @return The course's name.
+     * This overload constructor should only be used by the ArrayList indexOf method
+     * to detect if a seat number is already taken by overriding the equals method to test
+     * if two students are equal based on their seat number.
+     * @param seat The Student's seat number.
+     * @throws Exception if the setSeat method throws a data validation error.
+     */
+    public Student(int seat) throws Exception {
+        this();
+        setSeat(seat);
+    } // end of jesery overload constructor
+
+
+    /**
+     * Allow creating a Student plus setting their name and seat number.
+     * The constructor first calls the default constructor and then
+     * calls both the setName and setSeat methods for data validation.
+     * @param name The Student's name
+     * @param seat The Student's seat #
+     * @throws Exception if the name or seat setters throws an error
+     */
+    public Student(int seat, String name) throws Exception {
+        this();
+        setSeat(seat);
+        setName(name);
+    } // end of seat and name overload constructor
+
+
+
+
+    /**
+     * Get the Student's name.
+     * @return The Student's name.
      */
     public String getName() { return name; }
 
 
+
+
     /**
-     * Set the courses's name.
-     * @param name the courses's name
-     * @throws Exception if the course's name is blank (whitespace or empty)<br>
-     * Error Example: Student name can not be blank.
+     * Get the Student seat number.
+     * @return The Student's seat number
+     */
+    public int getSeat() { return seat; }
+
+
+
+
+    /**
+     * Get the Student's number of onTimes.
+     * @return the number of onTimes by the Student.
+     */
+    public int getOnTimes() {    return onTimes; }
+
+
+
+
+    /**
+     * Get the Student's number of 1pt field goals made.
+     * @return The number of 1pt field goals made by the Student.
+     */
+    public int getLate() { return late; }
+
+
+    /**
+     * Get the Student's number of 2pt field goals made.
+     * @return The number of 2pt field goals made by the Student.
+     */
+    public int getExcused() { return excused; }
+
+
+
+
+    /**
+     * Get the Student's number of 3pt field goals made.
+     * @return the number of 3pt field goals made by the Student.
+     */
+    public int getUnexcused() {return unexcused; }
+
+
+
+
+    /**
+     * Set the Student's seat number if it's a positive number between 1 and 55
+     * otherwise it throws an error.
+     * @param seat the student's seat number
+     * @throws Exception if the seat number isn't between 0 and 55 inclusively.<br>
+     * Error Example: Invalid seat number #10 for name Bob!
+     */
+    public void setSeat(int seat) throws Exception {
+        if (seat >= 0 && seat <= 55)
+            this.seat = seat;
+        else
+            throw new Exception("Invalid seat number #" + seat + " for name " + name + "!");
+    } // end of setSeat method
+
+
+
+
+    /**
+     * Set the Student's name. Uses the trim method to remove leading and trailing spaces
+     * and then if the name is an empty string, it will throw an error
+     * if not then it will set the student's name.
+     * @param name The Student's name
+     * @throw Exception if the student's name is blank (whitespace or empty)<br>
+     * Error Example: Name cannot be blank for seat number #10!
      */
     public void setName(String name) throws Exception {
-        name = name.trim(); // remove leading and trailing whitespace
 
 
-        //isBlank checks for both empty or whitespace
+
+
+        name = name.trim();
+
+
+
+
         if (name.isBlank())
-            throw new Exception("Student name can not be blank.");
-
-
-        this.name = name;
+            throw new Exception("Name cannot be blank for seat number #" + seat + "!");
+        else
+            this.name = name;
     } // end of setName method
 
-    /**
-     * Get a Student by their seat number using the ArrayList.indexOf method<br>
-     * If the indexOf method returns -1 then this method returns null otherwise,<br>
-     * it returns the Student object associated with the seat number.
-     * @param seat The Student's seat number.
-     * @return If a Student is found, it will return the Student object otherwise a null value.
-     * @throws Exception Creating a student with a invalid seat number could throw an error
-     */
-    public Student getStudent(int seat) throws Exception {
 
-
-        int index = students.indexOf(new Student(seat));
-
-
-        if (index == -1)
-            return null;
-        else
-            return students.get(index);
-
-
-    }
 
 
     /**
-     * Add a student to the Course, by using the overload constructor that allows setting their name and seat number too.<br>
-     * This method will verify that the seat number is not already used by another student by calling the Course.getStudent method.<br>
-     * and if it is, then it will throw an exception back to the calling method
-     * @param name The Student's name.
-     * @param seat The Student's seat number.
-     * @throws Exception Seat number # already assigned.
+     * Increment the appropriate field goal type, using a switch that also handles for invalid data.<br>
+     * case 0 is received then increment onTimes by 1<br>
+     * case 1 is received then increment fieldGoal_1pt by 1<br>
+     * case 2 is received then increment fieldGoal_2pt by 1<br>
+     * case 3 is received then increment fieldGoal_3pt by 1<br>
+     * default throw an exception displaying the invalid value that was received
+     * @param statsType The stats type 0=onTime, 1=1pt Field Goal Shot, 2=2pt Field Goal Shot, 3=3pt Field Goal
+     * @throws Exception if an invalid statsType is received (valid 0-3)<br>
+     * Error Example: Invalid statsType = 4
      */
-    public void addStudent(String name, int seat) throws Exception {
-        Student student = getStudent(seat);
-        if(student == null) {
-            students.add(new Student(seat, name));
-        } else {
-            throw new Exception("Seat #" + seat + " already assigned to " + student.getName() + "!");
+    public void updateStats(int statsType) throws Exception {
+
+
+        switch (statsType) {
+            case 0:
+                onTimes++;
+            case 1:
+                late++;
+                break;
+            case 2:
+                excused++;
+                break;
+            case 3:
+                unexcused++;
+                break;
+            default:
+                throw new Exception("Invalid statsType = " + statsType);
         }
-    }
+    } // end of updateStats method
+
+
+
+
+
 
 
 
     /**
-     * Get the total number of points for the entire Course by calling the Student.getPoints method.
-     * Uses a for loop to sum all the course's students points by calling the student's getPoints
-     * method.
-     * @return The Courses's points.
+     * Display the Student's seat number, name, # of onTimes,<br>
+     * Example:#10 Billy OnTimes=1 Points=5
      */
-    public int getCoursePoints() {
-        int totalPoints = 0;
-
-
-        for (Student student : students) {
-            totalPoints += student.getPoints();
-        }
-
-        return totalPoints;
+    public void displayStats() {
+        System.out.print("#" + seat + " " + name + " OnTimes=" + onTimes + " late=" + late +
+                " excused=" + excused + " unexcused=" + unexcused);
     }
 
+
+
+
     /**
-     * Get the total number of fouls for the entire Course using the Student.getFouls method.
-     * Uses a for loop to sum all the course's students fouls by calling the student's getFouls
-     * method.
-     * @return The total number of fouls for the Course.
+     * Instead of verifying two students are identical by equal identities.<br>
+     * This method will verify two students are the same by ONLY their seat number.<br>
+     * This allows the ArrayList.getIndex() method to return a student's by only checking their seat number.
+     * @param object a student object to check equality of ONLY the seat number
+     * @return true if the two student's seat are equal otherwise false
      */
-    public int getCourseFouls() {
-        int totalFouls = 0;
+    @Override
+    public boolean equals(Object object) {
 
 
-        for (Student student : students) {
-            totalFouls += student.getFouls();
-        }
-
-        return totalFouls;
-    }
+        if(!(object instanceof Student))
+            return false;
 
 
-    /**
-     * Display the Course's summary stats using the Course.getCourseFouls and getCoursePoints methods.<br>
-     * Example: <br>
-     * <pre>Course Wildcats Fouls=4 Points=23</pre>
-     */
-    public void displayCourseStats() {
-        System.out.println("Course " + name + " Fouls=" + getCourseFouls() + " Points=" + getCoursePoints());
-    }
-
-    /**
-     * Displays each Student's detail stats for the entire Course using the Student's getter methods.<br>
-     * This method uses the printf method for proper stats alignment. Example:<br>
-     * <pre>
-     * Seat Name            Fouls 1pt 2pt 3pt Total
-     * ====== =============== ===== === === === =====
-     *    10  Billy               1   2   3   1    10
-     *    24  Tammy               0   0   2   0     4
-     * </pre>
-     */
-    public void displayDetailStats() {
+        Student other = (Student)object;
 
 
-        Student student;
 
 
-        displayCourseStats();
+        return this.seat == other.getSeat();
+    } // end of override equals
 
 
-        System.out.println("Seat Name            Fouls 1pt 2pt 3pt Total");
-        System.out.println("====== =============== ===== === === === =====");
-
-
-        for (Student value : students) {
-
-
-            student = value;
-
-
-            System.out.printf("%6d %-15s %5d %3d %3d %3d %5d\n",
-                    student.getSeat(),
-                    student.getName(),
-                    student.getFouls(),
-                    student.getFieldGoals_1pt(),
-                    student.getFieldGoals_2pt(),
-                    student.getFieldGoals_3pt(),
-                    student.getPoints());
-        }
-
-        System.out.println();
-    }
 
 
     /**
-     * Returns the course's name.
-     * @return Course name.
+     * Returns the seat number and student name. Example:<br>
+     * #10 Billy
+     * @return The student's seat and name
      */
     @Override
     public String toString(){
-        return name;
+        return "#" + seat + " " + name;
     }
 }
-
-

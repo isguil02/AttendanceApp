@@ -1,144 +1,185 @@
+
+
+
+
 import java.util.ArrayList;
 import java.util.List;
 
+
+
+
 /**
- * Use to keep track of a basketball Team that is made up with multiple Players along with the Team's stats.
- * @author dejohns2
+ * Use to keep track of a basketball Course that is made up with multiple Students along with the Course's stats.
+ * @author Isguil02
  * @since 2025.02.22
  * @version 1.0 beta
- * @see <a href="https://github.com/dejohns2/JavaSection3_BB_Scoreboard_Spring2025.git">GitHub Repository</a>
+ * @see <a href="https://github.com/isguil02/AttendanceAppV2">GitHub Repository</a>
  */
-public class Team {
+public class Course {
+
+
+
 
     /**
-     * The team's name.
+     * The course's name.
      */
     private String name;
 
-    /** The team's players. */
-    private final List<Player> players;
 
-    /** Sets the team's name to "Unknown", and assigns players to an empty new ArrayList */
-    public Team() {
+
+
+    /** The course's students. */
+    private final List<Student> students;
+
+
+
+
+    /** Sets the course's name to "Unknown", and assigns students to an empty new ArrayList */
+    public Course() {
         name = "Unknown";
-        players = new ArrayList<>();
+        students = new ArrayList<>();
     }
 
+
+
+
     /**
-     * Calls the default constructor, and then set's the team's name using the setter for data validation.
-     * @param name the team's name
+     * Calls the default constructor, and then set's the course's name using the setter for data validation.
+     * @param name the course's name
      * @throw Exception if the setName fails due to a blank name
      */
-    public Team(String name) throws Exception {
+    public Course(String name) throws Exception {
         this();
         setName(name);
     }
 
+
+
+
     /**
-     * Gets the team's name.
-     * @return The team's name.
+     * Gets the course's name.
+     * @return The course's name.
      */
     public String getName() { return name; }
 
+
+
+
     /**
-     * Set the teams's name.
-     * @param name the teams's name
-     * @throws Exception if the team's name is blank (whitespace or empty)<br>
+     * Set the courses's name.
+     * @param name the courses's name
+     * @throws Exception if the course's name is blank (whitespace or empty)<br>
      * Error Example: Student name can not be blank.
      */
     public void setName(String name) throws Exception {
         name = name.trim(); // remove leading and trailing whitespace
 
+
+
+
         //isBlank checks for both empty or whitespace
         if (name.isBlank())
             throw new Exception("Student name can not be blank.");
 
+
+
+
         this.name = name;
     } // end of setName method
 
-    /**
-     * Get a Player by their jersey number using the ArrayList.indexOf method<br>
-     * If the indexOf method returns -1 then this method returns null otherwise,<br>
-     * it returns the Player object associated with the jersey number.
-     * @param jersey The Player's jersey number.
-     * @return If a Player is found, it will return the Player object otherwise a null value.
-     * @throws Exception Creating a player with a invalid jersey number could throw an error
-     */
-    public Player getPlayer(int jersey) throws Exception {
 
-        int index = players.indexOf(new Player(jersey));
+    /**
+     * Get a Student by their seat number using the ArrayList.indexOf method<br>
+     * If the indexOf method returns -1 then this method returns null otherwise,<br>
+     * it returns the Student object associated with the seat number.
+     * @param seat The Student's seat number.
+     * @return If a Student is found, it will return the Student object otherwise a null value.
+     * @throws Exception Creating a student with a invalid seat number could throw an error
+     */
+    public Student getStudent(int seat) throws Exception {
+
+
+
+
+        int index = students.indexOf(new Student(seat));
+
+
+
 
         if (index == -1)
             return null;
         else
-            return players.get(index);
+            return students.get(index);
+
+
+
 
     }
 
+
+
+
     /**
-     * Add a player to the Team, by using the overload constructor that allows setting their name and jersey number too.<br>
-     * This method will verify that the jersey number is not already used by another player by calling the Team.getPlayer method.<br>
+     * Add a student to the Course, by using the overload constructor that allows setting their name and seat number too.<br>
+     * This method will verify that the seat number is not already used by another student by calling the Course.getStudent method.<br>
      * and if it is, then it will throw an exception back to the calling method
-     * @param name The Player's name.
-     * @param jersey The Player's jersey number.
-     * @throws Exception Jersey number # already assigned.
+     * @param name The Student's name.
+     * @param seat The Student's seat number.
+     * @throws Exception Seat number # already assigned.
      */
-    public void addPlayer(String name, int jersey) throws Exception {
-        Player player = getPlayer(jersey);
-        if(player == null) {
-            players.add(new Player(jersey, name));
+    public void addStudent(String name, int seat) throws Exception {
+        Student student = getStudent(seat);
+        if(student == null) {
+            students.add(new Student(seat, name));
         } else {
-            throw new Exception("Jersey #" + jersey + " already assigned to " + player.getName() + "!");
+            throw new Exception("Seat #" + seat + " already assigned to " + student.getName() + "!");
         }
     }
 
 
+
+
+
+
+
     /**
-     * Get the total number of points for the entire Team by calling the Player.getPoints method.
-     * Uses a for loop to sum all the team's players points by calling the player's getPoints
+     * Get the total number of onTimes for the entire Course using the Student.getOnTimes method.
+     * Uses a for loop to sum all the course's students onTimes by calling the student's getOnTimes
      * method.
-     * @return The Teams's points.
+     * @return The total number of onTimes for the Course.
      */
-    public int getTeamPoints() {
-        int totalPoints = 0;
+    public int getCourseOnTimes() {
+        int totalOnTimes = 0;
 
-        for (Player player : players) {
-            totalPoints += player.getPoints();
+
+
+
+        for (Student student : students) {
+            totalOnTimes += student.getOnTimes();
         }
 
-        return totalPoints;
+
+        return totalOnTimes;
     }
 
-    /**
-     * Get the total number of fouls for the entire Team using the Player.getFouls method.
-     * Uses a for loop to sum all the team's players fouls by calling the player's getFouls
-     * method.
-     * @return The total number of fouls for the Team.
-     */
-    public int getTeamFouls() {
-        int totalFouls = 0;
 
-        for (Player player : players) {
-            totalFouls += player.getFouls();
-        }
 
-        return totalFouls;
-    }
 
     /**
-     * Display the Team's summary stats using the Team.getTeamFouls and getTeamPoints methods.<br>
+     * Display the Course's summary stats using the Course.getCourseOnTimes and getCoursePoints methods.<br>
      * Example: <br>
-     * <pre>Team Wildcats Fouls=4 Points=23</pre>
+     * <pre>Course Wildcats OnTimes=4 Points=23</pre>
      */
-    public void displayTeamStats() {
-        System.out.println("Team " + name + " Fouls=" + getTeamFouls() + " Points=" + getTeamPoints());
+    public void displayCourseStats() {
+        System.out.println("Course " + name + " OnTimes=" + getCourseOnTimes() );
     }
 
+
     /**
-     * Displays each Player's detail stats for the entire Team using the Player's getter methods.<br>
+     * Displays each Student's detail stats for the entire Course using the Student's getter methods.<br>
      * This method uses the printf method for proper stats alignment. Example:<br>
      * <pre>
-     * Jersey Name            Fouls 1pt 2pt 3pt Total
+     * Seat Name            OnTimes 1pt 2pt 3pt Total
      * ====== =============== ===== === === === =====
      *    10  Billy               1   2   3   1    10
      *    24  Tammy               0   0   2   0     4
@@ -146,36 +187,61 @@ public class Team {
      */
     public void displayDetailStats() {
 
-        Player player;
 
-        displayTeamStats();
 
-        System.out.println("Jersey Name            Fouls 1pt 2pt 3pt Total");
+
+        Student student;
+
+
+
+
+        displayCourseStats();
+
+
+
+
+        System.out.println("Seat Name            OnTimes 1pt 2pt 3pt Total");
         System.out.println("====== =============== ===== === === === =====");
 
-        for (Player value : players) {
 
-            player = value;
+
+
+        for (Student value : students) {
+
+
+
+
+            student = value;
+
+
+
 
             System.out.printf("%6d %-15s %5d %3d %3d %3d %5d\n",
-                    player.getJersey(),
-                    player.getName(),
-                    player.getFouls(),
-                    player.getFieldGoals_1pt(),
-                    player.getFieldGoals_2pt(),
-                    player.getFieldGoals_3pt(),
-                    player.getPoints());
+                    student.getSeat(),
+                    student.getName(),
+                    student.getOnTimes(),
+                    student.getLate(),
+                    student.getExcused(),
+                    student.getUnexcused());
         }
+
 
         System.out.println();
     }
 
+
+
+
     /**
-     * Returns the team's name.
-     * @return Team name.
+     * Returns the course's name.
+     * @return Course name.
      */
     @Override
     public String toString(){
         return name;
     }
 }
+
+
+
+
