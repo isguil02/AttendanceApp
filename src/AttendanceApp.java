@@ -19,6 +19,7 @@ public class AttendanceApp {
     /** Standard single dash line for display output */
     private static final String SINGLE_DASH_LINE = DOUBLE_DASH_LINE.replace('=', '-');
 
+    /** Default constructor that instantiate both courses*/
     public AttendanceApp(){
         section1 = new Course();
         section2 = new Course();
@@ -57,7 +58,7 @@ public class AttendanceApp {
                 return;
 
             try {
-                seat = Input.getIntRange("Enter " + name + "'s seat number: ", 0, 55);
+                seat = Input.getIntRange("Enter " + name + "'s seat number: ", 1, 55);
                 course.addStudent(name, seat);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
@@ -99,8 +100,6 @@ public class AttendanceApp {
             switch (userInput) {
                 case 0:
                     playGame = false;
-                    section1.displaySummaryReport();
-                    section2.displaySummaryReport();
                     System.out.println();
                     break;
 
@@ -148,10 +147,11 @@ public class AttendanceApp {
 
             System.out.println();
         }
-        course.displaySummaryReport();
+
         System.out.println();
         System.out.println(SINGLE_DASH_LINE);
-
+        course.displaySummaryReport();
+        System.out.println(SINGLE_DASH_LINE);
     } //end of courseAttendance
     private void studentAttendance(Student student){
 
@@ -160,7 +160,7 @@ public class AttendanceApp {
         System.out.println();
 
         System.out.println(SINGLE_DASH_LINE);
-        System.out.println("Enter #" + student.getSeat() + " " +student.getName() + "  Attendance");
+        System.out.println("Enter #" + student.getSeat() + " " +student.getName() + " Attendance");
         System.out.println(SINGLE_DASH_LINE);
         System.out.println("1 = On Time");
         System.out.println("2 = Late");
