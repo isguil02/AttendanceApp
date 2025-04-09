@@ -162,23 +162,24 @@ public class AttendanceApp {
         System.out.println(SINGLE_DASH_LINE);
         System.out.println("Enter #" + student.getSeat() + " " +student.getName() + "  Attendance");
         System.out.println(SINGLE_DASH_LINE);
-        System.out.println("0 = OnTime");
-        System.out.println("1 = Late");
-        System.out.println("2 = Excused");
-        System.out.println("3 = Unexcused");
+        System.out.println("1 = On Time");
+        System.out.println("2 = Late");
+        System.out.println("3 = Excused");
+        System.out.println("4 = Unexcused");
 
         System.out.println(SINGLE_DASH_LINE);
-        type = Input.getIntRange("Enter Status: ", 0, 3);
+        type = Input.getIntRange("Enter Status: ", 1, 4);
         System.out.println(SINGLE_DASH_LINE);
 
         try {
-            student.updateAttendance(type);
+            student.updateAttendance(type-1);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Unable to update player's stats!");
         }
 
         student.displayAttendance();
+        System.out.println();
 
 
     }//end of studentAttendance

@@ -223,8 +223,8 @@ public class Student {
      * Example:#10 Billy OnTimes=1 Points=5
      */
     public void displayAttendance() {
-        System.out.print("#" + seat + " " + name + " OnTime=" + onTime + " late=" + late +
-                " excused=" + excused + " unexcused=" + unexcused);
+        System.out.print("Seat #" + seat + " " + name + " OnTime=" + onTime + " Late=" + late +
+                " Excused=" + excused + " Unexcused=" + unexcused);
     }
 
 
@@ -263,6 +263,6 @@ public class Student {
      */
     @Override
     public String toString(){
-        return "Seat #" + seat + " " + name;
+        return "#" + seat + " " + name;
     }
 }
