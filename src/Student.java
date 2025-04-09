@@ -197,6 +197,7 @@ public class Student {
         switch (statsType) {
             case 0:
                 onTime++;
+                break;
             case 1:
                 late++;
                 break;
