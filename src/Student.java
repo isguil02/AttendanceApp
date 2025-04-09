@@ -21,7 +21,7 @@ public class Student {
 
 
     /** The student's number of onTimes. */
-    private int onTimes;
+    private int onTime;
 
 
     /** The Student's number of 1pt field goals. */
@@ -45,7 +45,7 @@ public class Student {
     private Student() {
         name = null;
         seat = 0;
-        onTimes = 0;
+        onTime = 0;
         late = 0;
         excused = 0;
         unexcused = 0;
@@ -106,7 +106,7 @@ public class Student {
      * Get the Student's number of onTimes.
      * @return the number of onTimes by the Student.
      */
-    public int getOnTimes() {    return onTimes; }
+    public int getOnTime() {    return onTime; }
 
 
 
@@ -191,12 +191,12 @@ public class Student {
      * @throws Exception if an invalid statsType is received (valid 0-3)<br>
      * Error Example: Invalid statsType = 4
      */
-    public void updateStats(int statsType) throws Exception {
+    public void updateAttendance(int statsType) throws Exception {
 
 
         switch (statsType) {
             case 0:
-                onTimes++;
+                onTime++;
             case 1:
                 late++;
                 break;
@@ -222,8 +222,8 @@ public class Student {
      * Display the Student's seat number, name, # of onTimes,<br>
      * Example:#10 Billy OnTimes=1 Points=5
      */
-    public void displayStats() {
-        System.out.print("#" + seat + " " + name + " OnTimes=" + onTimes + " late=" + late +
+    public void displayAttendance() {
+        System.out.print("#" + seat + " " + name + " OnTime=" + onTime + " late=" + late +
                 " excused=" + excused + " unexcused=" + unexcused);
     }
 
@@ -263,6 +263,6 @@ public class Student {
      */
     @Override
     public String toString(){
-        return "#" + seat + " " + name;
+        return "Seat #" + seat + " " + name;
     }
 }

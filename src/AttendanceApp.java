@@ -99,7 +99,8 @@ public class AttendanceApp {
             switch (userInput) {
                 case 0:
                     playGame = false;
-                    displayDetailReports();
+                    section1.displaySummaryReport();
+                    section2.displaySummaryReport();
                     System.out.println();
                     break;
 
@@ -112,7 +113,7 @@ public class AttendanceApp {
                         courseAttendance(section2);
 
                     System.out.println();
-                    displayDetailReports();
+
                     System.out.println();
                     break;
 
@@ -133,20 +134,21 @@ public class AttendanceApp {
         //display
 
         while (true) {
-            seat = Input.getIntRange("Enter " + course.getName() + "'s Seat # ", 1, 55);
-
+            seat = Input.getIntRange("Enter " + course.getName() + "'s Student Seat or 0 to quit: ", 0, 55);
+            if (seat == 0)
+                break;
             student = course.getStudent(seat);
 
             if (student == null) {
-                System.out.println("Invalid #, please try again!");
+                System.out.println("Invalid seat, please try again!");
                 continue;
             }
 
             studentAttendance(student);
 
-            break;
+            System.out.println();
         }
-
+        course.displaySummaryReport();
         System.out.println();
         System.out.println(SINGLE_DASH_LINE);
 
@@ -170,13 +172,13 @@ public class AttendanceApp {
         System.out.println(SINGLE_DASH_LINE);
 
         try {
-            student.updateStats(type);
+            student.updateAttendance(type);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Unable to update player's stats!");
         }
 
-        student.displayStats();
+        student.displayAttendance();
 
 
     }//end of studentAttendance

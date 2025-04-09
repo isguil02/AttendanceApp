@@ -116,7 +116,7 @@ public class Course {
         if(student == null) {
             students.add(new Student(seat, name));
         } else {
-            throw new Exception("Seat #" + seat + " already assigned to " + student.getName() + "!");
+            throw new Exception("Seat: " + seat + " is already assigned to " + student.getName() + "!");
         }
     }
 
@@ -137,12 +137,12 @@ public class Course {
         int totalUnexcused = 0;
         for (Student value : students) {
             student = value;
-            totalOnTimes+= student.getOnTimes();
+            totalOnTimes+= student.getOnTime();
             totalLate+= student.getLate();
             totalExcused+= student.getExcused();
             totalUnexcused+= student.getUnexcused();
         }
-        System.out.println("Course " + name + " OnTime=" + totalOnTimes + " Late =" + totalLate + " Excused=" + totalExcused + " Unexcused=" + totalUnexcused);
+        System.out.println(name + " OnTime=" + totalOnTimes + " Late =" + totalLate + " Excused=" + totalExcused + " Unexcused=" + totalUnexcused);
     }
 
 
@@ -171,7 +171,7 @@ public class Course {
             System.out.printf("%4d %-15s %6d %4d %7d %9d \n",
                     student.getSeat(),
                     student.getName(),
-                    student.getOnTimes(),
+                    student.getOnTime(),
                     student.getLate(),
                     student.getExcused(),
                     student.getUnexcused());
