@@ -120,7 +120,7 @@ public class Student {
      * and then if the name is an empty string, it will throw an error
      * if not then it will set the student's name.
      * @param name The Student's name
-     * @throw Exception if the student's name is blank (whitespace or empty)<br>
+     * @throws Exception if the student's name is blank (whitespace or empty)<br>
      * Error Example: Name cannot be blank for seat number #10!
      */
     public void setName(String name) throws Exception {

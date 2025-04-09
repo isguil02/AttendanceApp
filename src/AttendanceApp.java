@@ -47,7 +47,7 @@ public class AttendanceApp {
      * -----------------------------------------
      * Enter the Section 2's course name: 10:00 am
      * </pre>
-     * @throw Exception if the setters throw an error back due to data validation.
+     * @throws Exception if the setters throw an error back due to data validation.
      */
     private void setupCourses() throws Exception {
         String userInput;
