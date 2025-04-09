@@ -181,8 +181,8 @@ public class AttendanceApp {
 
     }//end of studentAttendance
     private void displayDetailReports() {
-                section1.displaySummaryReport();
-                section2.displaySummaryReport();
+                section1.displayDetailReport();
+                section2.displayDetailReport();
     } //end of displayAttendanceReport
     public static void main(String[] args) {
     AttendanceApp app = new AttendanceApp();

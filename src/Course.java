@@ -40,22 +40,6 @@ public class Course {
         students = new ArrayList<>();
     }
 
-
-
-
-    /**
-     * Calls the default constructor, and then set's the course's name using the setter for data validation.
-     * @param name the course's name
-     * @throw Exception if the setName fails due to a blank name
-     */
-    public Course(String name) throws Exception {
-        this();
-        setName(name);
-    }
-
-
-
-
     /**
      * Gets the course's name.
      * @return The course's name.
@@ -140,36 +124,26 @@ public class Course {
 
 
 
-
-
-    /**
-     * Get the total number of onTimes for the entire Course using the Student.getOnTimes method.
-     * Uses a for loop to sum all the course's students onTimes by calling the student's getOnTimes
-     * method.
-     * @return The total number of onTimes for the Course.
-     */
-    public int getCourseOnTimes() {
-        int totalOnTimes = 0;
-
-
-
-
-        for (Student student : students) {
-            totalOnTimes += student.getOnTimes();
-        }
-
-
-        return totalOnTimes;
-    }
-
-
-
-
     /**
      * Display the Course's summary stats using the Course.getCourseOnTimes and getCoursePoints methods.<br>
      * Example: <br>
      * <pre>Course Wildcats OnTimes=4 Points=23</pre>
      */
+    public void displaySummaryReport() {
+        Student student;
+        int totalOnTimes = 0;
+        int totalLate = 0;
+        int totalExcused = 0;
+        int totalUnexcused = 0;
+        for (Student value : students) {
+            student = value;
+            totalOnTimes+= student.getOnTimes();
+            totalLate+= student.getLate();
+            totalExcused+= student.getExcused();
+            totalUnexcused+= student.getUnexcused();
+        }
+        System.out.println("Course " + name + " OnTime=" + totalOnTimes + " Late =" + totalLate + " Excused=" + totalExcused + " Unexcused=" + totalUnexcused);
+    }
 
 
     /**
@@ -182,10 +156,10 @@ public class Course {
      *    24  Tammy               0   0   2   0     4
      * </pre>
      */
-    public void displaySummaryReport() {
+    public void displayDetailReport() {
         Student student;
 
-        //displayCourseStats();
+        displaySummaryReport();
 
         System.out.println("Seat Name            OnTime Late Excused Unexcused");
         System.out.println("==== =============== ====== ==== ======= =========");
@@ -194,7 +168,7 @@ public class Course {
 
             student = value;
 
-            System.out.printf("%4d %-15s %6d %3d %4d %6d %9d \n",
+            System.out.printf("%4d %-15s %6d %4d %7d %9d \n",
                     student.getSeat(),
                     student.getName(),
                     student.getOnTimes(),
