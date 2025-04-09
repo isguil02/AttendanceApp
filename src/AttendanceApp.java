@@ -19,17 +19,36 @@ public class AttendanceApp {
     /** Standard single dash line for display output */
     private static final String SINGLE_DASH_LINE = DOUBLE_DASH_LINE.replace('=', '-');
 
-    /** Default constructor that instantiate both courses*/
+    /** Default constructor that instantiate both courses */
     public AttendanceApp(){
         section1 = new Course();
         section2 = new Course();
     }//end of default constructor
+
+    /**
+     *  Displays the Attendance App header. Example:<br>
+     *  <pre>
+     *  =========================================
+     *  Welcome to the Attendance App
+     *  =========================================
+     *  </pre>
+     */
     private void displayAppHeading() {
         System.out.println(DOUBLE_DASH_LINE);
         System.out.println("Welcome to the Attendance App");
         System.out.println(DOUBLE_DASH_LINE);
         System.out.println();
     } //- end of displayAppHeading
+
+    /**
+     * Sets the courses names and calls setupStudents to setup each course's students. Example:<br>
+     * <pre>
+     * Enter Section 1 Class name: 9:00 am
+     * -----------------------------------------
+     * Enter the Section 2's course name: 10:00 am
+     * </pre>
+     * @throw Exception if the setters throw an error back due to data validation.
+     */
     private void setupCourses() throws Exception {
         String userInput;
 
@@ -45,6 +64,18 @@ public class AttendanceApp {
         section2.setName(userInput);
         setupStudents(section2);
     }//end of setupCourses
+
+    /**
+     * Sets up the course's students.<br>
+     * Calls Input.getLine to get the student's name<br>
+     * Calls Input.getIntRange to get the student's seat number between 1 and 55<br>
+     * Example:<br>
+     * <pre>
+     * Enter 9:00 am student's name or 'q' to quit: Bob
+     * Enter Bob's seat number: 10
+     * </pre>
+     * @param course The course to set up students for.
+     */
     private void setupStudents(Course course) {
         String courseName = course.getName();
         String name;
@@ -67,6 +98,22 @@ public class AttendanceApp {
 
         }
     } //end of setupStudents
+
+    /**
+     * Displays the main menu and handles user input for the menu options. Example:<br>
+     * <pre>
+     * --------------------------------------------------
+     * Main Menu
+     * --------------------------------------------------
+     * 0 = End Attendance App
+     * 1 = Take 9:00 am 's Attendance
+     * 2 = Take 10:00 am 's Attendance
+     * 3 = Display All Attendance Reports
+     * --------------------------------------------------
+     * Menu Choice:
+     * </pre>
+     * @throws Exception if the setupCourses or courseAttendance methods throw an error
+     */
     private void mainMenu() throws Exception {
 
 
@@ -126,6 +173,17 @@ public class AttendanceApp {
             } // end of switch
         }
     }//end of mainMenu
+
+    /**
+     * Update the select course's attendance.<br>
+     * Calls Input.getIntRange using range from 1 and 55.<br>
+     * Example: <br>
+     * <pre>
+     * Enter 9:00 am's Student Seat or 0 to quit: user input
+     * </pre>
+     * @param course The course to update attendance for.
+     * @throws Exception could throw an invalid seat error
+     */
     private void courseAttendance(Course course) throws Exception {
 
         int seat;
@@ -153,6 +211,28 @@ public class AttendanceApp {
         course.displaySummaryReport();
         System.out.println(SINGLE_DASH_LINE);
     } //end of courseAttendance
+
+    /**
+     * Displays the attendance for a student. Example:<br>
+     * <pre>
+     * --------------------------------------------------
+     * Enter #1 Joe Attendance
+     * --------------------------------------------------
+     * 1 = On Time
+     * 2 = Late
+     * 3 = Excused
+     * 4 = Unexcused
+     * --------------------------------------------------
+     * Enter Status: 3
+     * --------------------------------------------------
+     * Seat #1 Joe OnTime=0 Late=0 Excused=1 Unexcused=0
+     *
+     * Enter 10:00 am's Student Seat or 0 to quit: 2
+     *
+     * --------------------------------------------------
+     * </pre>
+     * @param student The student to display attendance for.
+     */
     private void studentAttendance(Student student){
 
         int type;
@@ -183,10 +263,26 @@ public class AttendanceApp {
 
 
     }//end of studentAttendance
+
+    /**
+     * Displays the detail reports for both courses.<br>
+     * Calls Course.displayDetailReport for each course.
+     */
     private void displayDetailReports() {
                 section1.displayDetailReport();
                 section2.displayDetailReport();
     } //end of displayAttendanceReport
+
+    /**
+     * Main method that creates the AttendanceApp object and then
+     * setups up the courses and displays the main menu.
+     * <br>
+     * 1) creates a new AttendanceApp<br>
+     * 2) calls the displayAppHeading method<br>
+     * 3) using a try-catch calls setupCourses and mainMenu methods<br>
+     * <br>
+     * @param args No command line input args are used for this application
+     */
     public static void main(String[] args) {
     AttendanceApp app = new AttendanceApp();
     app.displayAppHeading();
@@ -201,4 +297,4 @@ public class AttendanceApp {
     Input.sc.close();
 
     }//end of main
-}
+} //end of AttendanceApp

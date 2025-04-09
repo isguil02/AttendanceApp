@@ -1,12 +1,5 @@
-
-
-
-
 import java.util.ArrayList;
 import java.util.List;
-
-
-
 
 /**
  * Use to keep track of a basketball Course that is made up with multiple Students along with the Course's stats.
@@ -17,22 +10,13 @@ import java.util.List;
  */
 public class Course {
 
-
-
-
     /**
      * The course's name.
      */
     private String name;
 
-
-
-
     /** The course's students. */
     private final List<Student> students;
-
-
-
 
     /** Sets the course's name to "Unknown", and assigns students to an empty new ArrayList */
     public Course() {
@@ -46,9 +30,6 @@ public class Course {
      */
     public String getName() { return name; }
 
-
-
-
     /**
      * Set the courses's name.
      * @param name the courses's name
@@ -58,15 +39,9 @@ public class Course {
     public void setName(String name) throws Exception {
         name = name.trim(); // remove leading and trailing whitespace
 
-
-
-
         //isBlank checks for both empty or whitespace
         if (name.isBlank())
             throw new Exception("Student name can not be blank.");
-
-
-
 
         this.name = name;
     } // end of setName method
@@ -82,13 +57,7 @@ public class Course {
      */
     public Student getStudent(int seat) throws Exception {
 
-
-
-
         int index = students.indexOf(new Student(seat));
-
-
-
 
         if (index == -1)
             return null;
@@ -99,9 +68,6 @@ public class Course {
 
 
     }
-
-
-
 
     /**
      * Add a student to the Course, by using the overload constructor that allows setting their name and seat number too.<br>
@@ -120,14 +86,12 @@ public class Course {
         }
     }
 
-
-
-
-
     /**
-     * Display the Course's summary stats using the Course.getCourseOnTimes and getCoursePoints methods.<br>
-     * Example: <br>
-     * <pre>Course Wildcats OnTimes=4 Points=23</pre>
+     * Displays the Course's summary stats for the entire Course using the Student's getter methods.<br>
+     * This method uses the printf method for proper stats alignment. Example:<br>
+     * <pre>
+     * 9:00 am OnTime=10 Late=5 Excused=2 Unexcused=3
+     * </pre>
      */
     public void displaySummaryReport() {
         Student student;
@@ -147,13 +111,13 @@ public class Course {
 
 
     /**
-     * Displays each Student's detail stats for the entire Course using the Student's getter methods.<br>
+     * Displays the Course's detailed stats for the entire Course using the Student's getter methods.<br>
      * This method uses the printf method for proper stats alignment. Example:<br>
      * <pre>
-     * Seat Name            OnTimes 1pt 2pt 3pt Total
-     * ====== =============== ===== === === === =====
-     *    10  Billy               1   2   3   1    10
-     *    24  Tammy               0   0   2   0     4
+     * Seat Name            OnTime Late Excused Unexcused
+     * ==== =============== ====== ==== ======= =========
+     *    1 Joe                  1    0       0         0
+     *    2 Billy                0    1       0         0
      * </pre>
      */
     public void displayDetailReport() {
@@ -180,9 +144,6 @@ public class Course {
 
         System.out.println();
     }
-
-
-
 
     /**
      * Returns the course's name.

@@ -7,36 +7,23 @@
  */
 public class Student {
 
-
-
-
     /** The Student's seat. */
     private int seat;
-
-
-
 
     /** The Student's name. */
     private String name;
 
-
     /** The student's number of onTimes. */
     private int onTime;
 
-
-    /** The Student's number of 1pt field goals. */
+    /** The Student's number of Lates. */
     private int late;
 
-
-    /** The Student's number of 2pt field goals. Need to multiply by 2 when calculating total points. */
+    /** The Student's number of excused. */
     private int excused;
 
-
-    /** The Student's number of 3pt field goals. Need to multiply by 3 when calculating total points. */
+    /** The Student's number of unexcused. */
     private int unexcused;
-
-
-
 
     /**
      * Set the Student's fields to default values null and zeroes.
@@ -52,8 +39,6 @@ public class Student {
     } // end of default constructor
 
 
-
-
     /**
      * This overload constructor should only be used by the ArrayList indexOf method
      * to detect if a seat number is already taken by overriding the equals method to test
@@ -64,8 +49,7 @@ public class Student {
     public Student(int seat) throws Exception {
         this();
         setSeat(seat);
-    } // end of jesery overload constructor
-
+    } // end of seat overload constructor
 
     /**
      * Allow creating a Student plus setting their name and seat number.
@@ -81,17 +65,11 @@ public class Student {
         setName(name);
     } // end of seat and name overload constructor
 
-
-
-
     /**
      * Get the Student's name.
      * @return The Student's name.
      */
     public String getName() { return name; }
-
-
-
 
     /**
      * Get the Student seat number.
@@ -99,59 +77,43 @@ public class Student {
      */
     public int getSeat() { return seat; }
 
-
-
-
     /**
      * Get the Student's number of onTimes.
      * @return the number of onTimes by the Student.
      */
     public int getOnTime() {    return onTime; }
 
-
-
-
     /**
-     * Get the Student's number of 1pt field goals made.
-     * @return The number of 1pt field goals made by the Student.
+     * Get the Student's number of Lates.
+     * @return the number of Lates by the Student.
      */
     public int getLate() { return late; }
 
-
     /**
-     * Get the Student's number of 2pt field goals made.
-     * @return The number of 2pt field goals made by the Student.
+     * Get the Student's number of excused.
+     * @return the number of excused by the Student.
      */
     public int getExcused() { return excused; }
 
-
-
-
     /**
-     * Get the Student's number of 3pt field goals made.
-     * @return the number of 3pt field goals made by the Student.
+     * Get the Student's number of unexcused.
+     * @return the number of unexcused by the Student.
      */
     public int getUnexcused() {return unexcused; }
-
-
-
 
     /**
      * Set the Student's seat number if it's a positive number between 1 and 55
      * otherwise it throws an error.
      * @param seat the student's seat number
-     * @throws Exception if the seat number isn't between 0 and 55 inclusively.<br>
+     * @throws Exception if the seat number isn't between 1 and 55 inclusively.<br>
      * Error Example: Invalid seat number #10 for name Bob!
      */
     public void setSeat(int seat) throws Exception {
-        if (seat >= 0 && seat <= 55)
+        if (seat >= 1 && seat <= 55)
             this.seat = seat;
         else
             throw new Exception("Invalid seat number #" + seat + " for name " + name + "!");
     } // end of setSeat method
-
-
-
 
     /**
      * Set the Student's name. Uses the trim method to remove leading and trailing spaces
@@ -163,13 +125,7 @@ public class Student {
      */
     public void setName(String name) throws Exception {
 
-
-
-
         name = name.trim();
-
-
-
 
         if (name.isBlank())
             throw new Exception("Name cannot be blank for seat number #" + seat + "!");
@@ -181,18 +137,16 @@ public class Student {
 
 
     /**
-     * Increment the appropriate field goal type, using a switch that also handles for invalid data.<br>
-     * case 0 is received then increment onTimes by 1<br>
-     * case 1 is received then increment fieldGoal_1pt by 1<br>
-     * case 2 is received then increment fieldGoal_2pt by 1<br>
-     * case 3 is received then increment fieldGoal_3pt by 1<br>
-     * default throw an exception displaying the invalid value that was received
-     * @param statsType The stats type 0=onTime, 1=1pt Field Goal Shot, 2=2pt Field Goal Shot, 3=3pt Field Goal
-     * @throws Exception if an invalid statsType is received (valid 0-3)<br>
-     * Error Example: Invalid statsType = 4
+     * Update the Student's attendance stats.<br>
+     * The statsType is an int that represents the type of attendance:<br>
+     * 0 = OnTime<br>
+     * 1 = Late<br>
+     * 2 = Excused<br>
+     * 3 = Unexcused<br>
+     * @param statsType The type of attendance to update
+     * @throws Exception if the statsType is invalid
      */
     public void updateAttendance(int statsType) throws Exception {
-
 
         switch (statsType) {
             case 0:
@@ -212,24 +166,15 @@ public class Student {
         }
     } // end of updateStats method
 
-
-
-
-
-
-
-
     /**
-     * Display the Student's seat number, name, # of onTimes,<br>
-     * Example:#10 Billy OnTimes=1 Points=5
+     * Display the Student's attendance stats.<br>
+     * Example:<br>
+     * Seat #1 Joe OnTime=0 Late=0 Excused=1 Unexcused=0
      */
     public void displayAttendance() {
         System.out.print("Seat #" + seat + " " + name + " OnTime=" + onTime + " Late=" + late +
                 " Excused=" + excused + " Unexcused=" + unexcused);
     }
-
-
-
 
     /**
      * Instead of verifying two students are identical by equal identities.<br>
@@ -253,9 +198,6 @@ public class Student {
 
         return this.seat == other.getSeat();
     } // end of override equals
-
-
-
 
     /**
      * Returns the seat number and student name. Example:<br>
