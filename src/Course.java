@@ -170,9 +170,6 @@ public class Course {
      * Example: <br>
      * <pre>Course Wildcats OnTimes=4 Points=23</pre>
      */
-    public void displayCourseStats() {
-        System.out.println("Course " + name + " OnTimes=" + getCourseOnTimes() );
-    }
 
 
     /**
@@ -185,38 +182,19 @@ public class Course {
      *    24  Tammy               0   0   2   0     4
      * </pre>
      */
-    public void displayDetailStats() {
-
-
-
-
+    public void displaySummaryReport() {
         Student student;
 
+        //displayCourseStats();
 
-
-
-        displayCourseStats();
-
-
-
-
-        System.out.println("Seat Name            OnTimes 1pt 2pt 3pt Total");
-        System.out.println("====== =============== ===== === === === =====");
-
-
-
+        System.out.println("Seat Name            OnTime Late Excused Unexcused");
+        System.out.println("==== =============== ====== ==== ======= =========");
 
         for (Student value : students) {
 
-
-
-
             student = value;
 
-
-
-
-            System.out.printf("%6d %-15s %5d %3d %3d %3d %5d\n",
+            System.out.printf("%4d %-15s %6d %3d %4d %6d %9d \n",
                     student.getSeat(),
                     student.getName(),
                     student.getOnTimes(),

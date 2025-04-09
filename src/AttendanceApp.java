@@ -40,7 +40,7 @@ public class AttendanceApp {
         System.out.println(SINGLE_DASH_LINE);
         System.out.println();
 
-        userInput = Input.getLine("Enter the AWAY TEAM name: ");
+        userInput = Input.getLine("Enter the Section 2's course name: ");
         section2.setName(userInput);
         setupStudents(section2);
     }//end of setupCourses
@@ -57,7 +57,7 @@ public class AttendanceApp {
                 return;
 
             try {
-                seat = Input.getIntRange("Enter " + name + "'s jersey number: ", 0, 55);
+                seat = Input.getIntRange("Enter " + name + "'s seat number: ", 0, 55);
                 course.addStudent(name, seat);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
@@ -66,23 +66,130 @@ public class AttendanceApp {
 
         }
     } //end of setupStudents
-    private void mainMenu() throws Exception{
+    private void mainMenu() throws Exception {
 
+
+        boolean playGame = true;
+        int userInput;
+
+        System.out.println();
+        System.out.println(DOUBLE_DASH_LINE);
+        System.out.println("Recording Attendance!");
+        System.out.println(DOUBLE_DASH_LINE);
+        System.out.println();
+
+
+        while (playGame) {
+
+            System.out.println(SINGLE_DASH_LINE);
+            System.out.println("Main Menu");
+            System.out.println(SINGLE_DASH_LINE);
+
+            System.out.println("0 = End Attendance App");
+            System.out.println("1 = Take " + section1.getName() + " 's Attendance");
+            System.out.println("2 = Take " + section2.getName() + " 's Attendance");
+            System.out.println("3 = Display All Attendance Reports");
+
+            System.out.println(SINGLE_DASH_LINE);
+            userInput = Input.getIntRange("Menu Choice: ", 0, 3);
+            System.out.println(SINGLE_DASH_LINE);
+
+            System.out.println();
+
+            switch (userInput) {
+                case 0:
+                    playGame = false;
+                    displayDetailReports();
+                    System.out.println();
+                    break;
+
+                case 1:
+                case 2:
+
+                    if (userInput == 1)
+                        courseAttendance(section1);
+                    else
+                        courseAttendance(section2);
+
+                    System.out.println();
+                    displayDetailReports();
+                    System.out.println();
+                    break;
+
+                case 3:
+                    displayDetailReports();
+                    break;
+
+                default:
+                    System.out.println("Invalid menu choice = " + userInput);
+
+            } // end of switch
+        }
     }//end of mainMenu
     private void courseAttendance(Course course) throws Exception {
+
+        int seat;
+        Student student;
+        //display
+
+        while (true) {
+            seat = Input.getIntRange("Enter " + course.getName() + "'s Seat # ", 1, 55);
+
+            student = course.getStudent(seat);
+
+            if (student == null) {
+                System.out.println("Invalid #, please try again!");
+                continue;
+            }
+
+            studentAttendance(student);
+
+            break;
+        }
+
+        System.out.println();
+        System.out.println(SINGLE_DASH_LINE);
 
     } //end of courseAttendance
     private void studentAttendance(Student student){
 
-    }//end of studentAttendance
-    private void displayDetailReport(Course course) {
+        int type;
 
+        System.out.println();
+
+        System.out.println(SINGLE_DASH_LINE);
+        System.out.println("Enter #" + student.getSeat() + " " +student.getName() + "  Attendance");
+        System.out.println(SINGLE_DASH_LINE);
+        System.out.println("0 = OnTime");
+        System.out.println("1 = Late");
+        System.out.println("2 = Excused");
+        System.out.println("3 = Unexcused");
+
+        System.out.println(SINGLE_DASH_LINE);
+        type = Input.getIntRange("Enter Status: ", 0, 3);
+        System.out.println(SINGLE_DASH_LINE);
+
+        try {
+            student.updateStats(type);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Unable to update player's stats!");
+        }
+
+        student.displayStats();
+
+
+    }//end of studentAttendance
+    private void displayDetailReports() {
+                section1.displaySummaryReport();
+                section2.displaySummaryReport();
     } //end of displayAttendanceReport
     public static void main(String[] args) {
     AttendanceApp app = new AttendanceApp();
     app.displayAppHeading();
     try {
         app.setupCourses();
+        app.mainMenu();
     } catch (Exception e) {
         System.out.println(e.getMessage());
         System.out.println("Sorry but this program ended with an error. Please contact Isaiah!");
