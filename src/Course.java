@@ -31,8 +31,8 @@ public class Course {
     public String getName() { return name; }
 
     /**
-     * Set the courses's name.
-     * @param name the courses's name
+     * Set the course's name.
+     * @param name the course's name
      * @throws Exception if the course's name is blank (whitespace or empty)<br>
      * Error Example: Student name can not be blank.
      */
@@ -53,7 +53,7 @@ public class Course {
      * it returns the Student object associated with the seat number.
      * @param seat The Student's seat number.
      * @return If a Student is found, it will return the Student object otherwise a null value.
-     * @throws Exception Creating a student with a invalid seat number could throw an error
+     * @throws Exception Creating a student with an invalid seat number could throw an error
      */
     public Student getStudent(int seat) throws Exception {
 
@@ -88,7 +88,7 @@ public class Course {
 
     /**
      * Displays the Course's summary stats for the entire Course using the Student's getter methods.<br>
-     * This method uses the printf method for proper stats alignment. Example:<br>
+     * This method uses the printf method for proper stats' alignment. Example:<br>
      * <pre>
      * 9:00 am OnTime=10 Late=5 Excused=2 Unexcused=3
      * </pre>
@@ -112,7 +112,7 @@ public class Course {
 
     /**
      * Displays the Course's detailed stats for the entire Course using the Student's getter methods.<br>
-     * This method uses the printf method for proper stats alignment. Example:<br>
+     * This method uses the printf method for proper stats' alignment. Example:<br>
      * <pre>
      * Seat Name            OnTime Late Excused Unexcused
      * ==== =============== ====== ==== ======= =========

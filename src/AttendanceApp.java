@@ -41,7 +41,7 @@ public class AttendanceApp {
     } //- end of displayAppHeading
 
     /**
-     * Sets the courses names and calls setupStudents to setup each course's students. Example:<br>
+     * Sets the courses names and calls setupStudents to set up each course's students. Example:<br>
      * <pre>
      * Enter Section 1 Class name: 9:00 am
      * -----------------------------------------

@@ -16,7 +16,7 @@ public class Student {
     /** The student's number of onTimes. */
     private int onTime;
 
-    /** The Student's number of Lates. */
+    /** The Student's number of Late. */
     private int late;
 
     /** The Student's number of excused. */
@@ -84,8 +84,8 @@ public class Student {
     public int getOnTime() {    return onTime; }
 
     /**
-     * Get the Student's number of Lates.
-     * @return the number of Lates by the Student.
+     * Get the Student's number of Late.
+     * @return the number of Late by the Student.
      */
     public int getLate() { return late; }
 
@@ -186,15 +186,10 @@ public class Student {
     @Override
     public boolean equals(Object object) {
 
-
         if(!(object instanceof Student))
             return false;
 
-
         Student other = (Student)object;
-
-
-
 
         return this.seat == other.getSeat();
     } // end of override equals
