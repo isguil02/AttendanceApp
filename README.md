@@ -1,7 +1,7 @@
-# AttendanceAppV2
+# AttendanceApp
 
 ## Overview
-AttendanceAppV2 is a Java-based application designed to manage and track student attendance
+AttendanceApp is a Java-based application designed to manage and track student attendance
 in a course. It provides functionality to record attendance statistics such as on-time, late, excused, 
 and unexcused counts for each student. The application ensures data validation for student details 
 like seat numbers and names.
@@ -41,7 +41,7 @@ like seat numbers and names.
 ### Installation
 1. Clone the repository:
     ```sh
-    git clone https://github.com/isguil02/AttendanceAppV2
+    git clone https://github.com/isguil02/AttendanceApp
     ```
 2. Open the project in your IDE.
 3. Build the project to resolve dependencies.
